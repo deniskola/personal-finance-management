@@ -9,4 +9,8 @@ export class TransactionService {
   constructor(private http: HttpClient) {
     
     }
+
+    public getTransactions(){
+      return this.http.get("http://127.0.0.1:4010/transactions");
+    }
 }

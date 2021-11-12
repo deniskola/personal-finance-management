@@ -11,6 +11,11 @@ import {MatDividerModule} from '@angular/material/divider';
 import { HomeComponent } from './home/home.component';
 import { FinanceManagementComponent } from './finance-management/finance-management.component';
 import { HttpClientModule } from '@angular/common/http';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatTableModule} from '@angular/material/table';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatPaginatorModule} from '@angular/material/paginator';
+
 
 @NgModule({
   declarations: [
@@ -27,7 +32,11 @@ import { HttpClientModule } from '@angular/common/http';
     MatIconModule,
     MatDividerModule,
     MatButtonModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTabsModule,
+    MatTableModule,
+    MatFormFieldModule,
+    MatPaginatorModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

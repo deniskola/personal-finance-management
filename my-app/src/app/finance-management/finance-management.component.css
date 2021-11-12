@@ -1,0 +1,30 @@
+.container {
+  position: relative;
+  height: 100%;
+  border: 1px solid rgb(153, 153, 153);
+  width: 50%;
+}
+
+.table-container {
+  position: relative;
+  height: 90%;
+  overflow: auto;
+}
+table {
+  width: 100%;
+}
+mat-paginator {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  border-top: 1px solid rgb(153, 153, 153);
+}
+
+.credit-arrow {
+  color: green !important;
+}
+
+mat-icon {
+  height: 12px !important;
+  width: 12px !important;
+}

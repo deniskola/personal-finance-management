@@ -1,0 +1,15 @@
+<h4 mat-dialog-title>Categorize transactions</h4>
+ <div mat-dialog-content >
+        <mat-form-field >
+            <mat-label>Category</mat-label>
+            <mat-select>
+            <mat-option *ngFor="let category of categories" [value]="category.code">
+                {{category.name}}
+            </mat-option>
+            </mat-select>
+        </mat-form-field> 
+</div> 
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Submit</button>
+  </mat-dialog-actions>

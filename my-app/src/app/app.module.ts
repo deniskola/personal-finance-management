@@ -15,13 +15,19 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatTableModule} from '@angular/material/table';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatDialogModule} from '@angular/material/dialog';
+import {CategorizeDialogComponent} from './categorize-dialog/categorize-dialog.component';
+import {MatSelectModule} from '@angular/material/select';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    FinanceManagementComponent
+    FinanceManagementComponent,
+    CategorizeDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -37,6 +43,10 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatTableModule,
     MatFormFieldModule,
     MatPaginatorModule,
+    MatMenuModule,
+    MatDialogModule,
+    MatSelectModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

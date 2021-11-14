@@ -24,7 +24,8 @@ mat-paginator {
   color: green !important;
 }
 
-mat-icon {
-  height: 12px !important;
-  width: 12px !important;
+td {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

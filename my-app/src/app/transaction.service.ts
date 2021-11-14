@@ -13,4 +13,8 @@ export class TransactionService {
     public getTransactions(){
       return this.http.get("http://127.0.0.1:4010/transactions");
     }
+
+    public getCategories(){
+      return this.http.get("http://127.0.0.1:4010/categories");
+    }
 }

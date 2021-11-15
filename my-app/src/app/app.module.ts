@@ -19,7 +19,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatDialogModule} from '@angular/material/dialog';
 import {CategorizeDialogComponent} from './categorize-dialog/categorize-dialog.component';
 import {MatSelectModule} from '@angular/material/select';
-
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 @NgModule({
@@ -46,7 +46,7 @@ import {MatSelectModule} from '@angular/material/select';
     MatMenuModule,
     MatDialogModule,
     MatSelectModule,
-    
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

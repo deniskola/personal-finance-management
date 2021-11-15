@@ -1,47 +1,61 @@
 <div class="container">
   <div class="table-container">
 <table mat-table [dataSource]="dataSource" >
-    
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef>
-         Select
-      </th>     
-      <td mat-cell *matCellDef="let element"> 
-        <div>
-          <b>{{element.description}} </b> 
-          <mat-icon color="warn" *ngIf="element.direction === 'd'">keyboard_arrow_up</mat-icon>
-          <mat-icon color="primary" *ngIf="element.direction === 'c'">keyboard_arrow_down</mat-icon>
-          <br> 
-          <p>{{element.date}}</p>
-          
-          {{element.amount}}
-          <br><br>
-        </div> 
-        <div>
-          <button mat-icon-button [matMenuTriggerFor]="menu">
-            <mat-icon>more_vert</mat-icon>
+  <ng-container matColumnDef="select">
+    <th mat-header-cell *matHeaderCellDef>
+      <mat-checkbox (change)="$event ? masterToggle() : null"
+                    [checked]="selection.hasValue() && isAllSelected()"
+                    [indeterminate]="selection.hasValue() && !isAllSelected()"
+                    [aria-label]="checkboxLabel()"
+                    color="warn">
+      </mat-checkbox>
+    </th>
+    <td mat-cell *matCellDef="let element" class="first-column">
+      <mat-checkbox (click)="$event.stopPropagation()"
+
+                    (change)="$event ? selection.toggle(element) : null"
+                    [checked]="selection.isSelected(element)"
+                    [aria-label]="checkboxLabel(element)"
+                    color="warn">
+      </mat-checkbox>
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>
+        Select
+    </th>     
+    <td mat-cell *matCellDef="let element" class="second-column"> 
+      <div>
+        <b>{{element.description}} </b> 
+        <mat-icon color="warn" *ngIf="element.direction === 'd'">keyboard_arrow_up</mat-icon>
+        <mat-icon color="primary" *ngIf="element.direction === 'c'">keyboard_arrow_down</mat-icon>
+        <br> 
+        <p>{{element.date}}</p>
+        
+        {{element.amount}}
+        <br><br>
+      </div> 
+      <div>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu" xPosition="before">
+          <button mat-menu-item (click)="openDialog()">
+            <mat-icon>category</mat-icon>
+            Categorize
           </button>
-          <mat-menu #menu="matMenu" xPosition="before">
-            <button mat-menu-item (click)="openDialog()">
-              <mat-icon>category</mat-icon>
-              Categorize
-            </button>
-            <mat-divider></mat-divider>
-            <button mat-menu-item>
-              <mat-icon>call_split</mat-icon>
-              Split
-            </button>
-          </mat-menu>
-          
-        </div>
-      </td>
-    </ng-container>
-    
-    
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+          <mat-divider></mat-divider>
+          <button mat-menu-item>
+            <mat-icon>call_split</mat-icon>
+            Split
+          </button>
+        </mat-menu>
+      </div>
+    </td>
+  </ng-container> 
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
 </div>
   <mat-paginator [pageSizeOptions]="[5, 7, 10, 25, 100]" aria-label="Select page of transactions"></mat-paginator>
 </div>
-  

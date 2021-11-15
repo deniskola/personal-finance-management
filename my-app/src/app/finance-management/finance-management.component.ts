@@ -7,6 +7,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import { TransactionService } from '../transaction.service';
 import { HomeComponent } from '../home/home.component';
 import { CategorizeDialogComponent } from '../categorize-dialog/categorize-dialog.component';
+import {SelectionModel} from '@angular/cdk/collections';
 
  export interface TransactionData {
    id: number;
@@ -18,10 +19,11 @@ import { CategorizeDialogComponent } from '../categorize-dialog/categorize-dialo
   styleUrls: ['./finance-management.component.css']
 })
 export class FinanceManagementComponent implements OnInit, AfterViewInit {
-  public displayedColumns: string[] = ['id'];
+  public displayedColumns: string[] = ['select', 'id'];
   public dataSource: MatTableDataSource<TransactionData>;
  
   public transaction:any ={};
+  selection = new SelectionModel<TransactionData>(true, []);
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
@@ -37,7 +39,7 @@ export class FinanceManagementComponent implements OnInit, AfterViewInit {
       console.log(transaction);
       this.dataSource.data = transaction.items;
     })
-
+    
   }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -46,6 +48,29 @@ export class FinanceManagementComponent implements OnInit, AfterViewInit {
 
   openDialog() {
     this.dialog.open(CategorizeDialogComponent);
+  }
+
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
+  }
+
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  masterToggle() {
+    if (this.isAllSelected()) {
+      this.selection.clear();
+      return;
+    }
+
+    this.selection.select(...this.dataSource.data);
+  }
+
+  checkboxLabel(row?: TransactionData): string {
+    if (!row) {
+      return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
+    }
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.id + 1}`;
   }
 
 }

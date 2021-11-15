@@ -21,9 +21,9 @@ import {SelectionModel} from '@angular/cdk/collections';
 export class FinanceManagementComponent implements OnInit, AfterViewInit {
   public displayedColumns: string[] = ['select', 'id'];
   public dataSource: MatTableDataSource<TransactionData>;
- 
   public transaction:any ={};
   selection = new SelectionModel<TransactionData>(true, []);
+  public checkBoxIsShown: boolean = false ; // hidden by default
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
@@ -71,6 +71,10 @@ export class FinanceManagementComponent implements OnInit, AfterViewInit {
       return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
     }
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.id + 1}`;
+  }
+
+  toggleShow() {
+    this.checkBoxIsShown = ! this.checkBoxIsShown;
   }
 
 }

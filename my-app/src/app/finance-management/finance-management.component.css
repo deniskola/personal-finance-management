@@ -30,3 +30,7 @@ mat-paginator {
   justify-content: space-between;
   align-items: center;
 }
+
+#select-btn {
+  margin-right: 10px;
+}

@@ -12,6 +12,7 @@ import {SelectionModel} from '@angular/cdk/collections';
  export interface TransactionData {
    id: number;
    amount: number;
+  
  }
 @Component({
   selector: 'app-finance-management',
@@ -25,17 +26,18 @@ export class FinanceManagementComponent implements OnInit, AfterViewInit {
   selection = new SelectionModel<TransactionData>(true, []);
   public checkBoxIsShown: boolean = false ; // hidden by default
   selected!: number;
-  kinds = [{
+  
+  transactionsKinds = [{
       key: "pmt",
-      value: "PMT"
+      value: "Payment"
     },
     {
       key: "dep",
-      value: "DEP"
+      value: "Deposit"
     },
     {
       key: "fee",
-      value: "FEE"
+      value: "Fee"
     }]
 
   @ViewChild(MatPaginator)
@@ -49,14 +51,18 @@ export class FinanceManagementComponent implements OnInit, AfterViewInit {
   }
   ngOnInit(): void {
     this.transactionService.getTransactions().subscribe((transaction:any)=>{
-      console.log(transaction);
-      this.dataSource.data = transaction.items
+      this.dataSource.data = transaction.items;
+      this.transaction = transaction.items
     })
-    
   }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+  }
+
+  filterTransactionsByKind(event: any){
+    this.dataSource.data = this.transaction.filter((x:any) => x['kind'] === event.value);
+    console.log(this.dataSource.data)
   }
   
   applyFilter(event: Event) {

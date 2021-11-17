@@ -24,6 +24,19 @@ export class FinanceManagementComponent implements OnInit, AfterViewInit {
   public transaction:any ={};
   selection = new SelectionModel<TransactionData>(true, []);
   public checkBoxIsShown: boolean = false ; // hidden by default
+  selected!: number;
+  kinds = [{
+      key: "pmt",
+      value: "PMT"
+    },
+    {
+      key: "dep",
+      value: "DEP"
+    },
+    {
+      key: "fee",
+      value: "FEE"
+    }]
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
@@ -37,7 +50,7 @@ export class FinanceManagementComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.transactionService.getTransactions().subscribe((transaction:any)=>{
       console.log(transaction);
-      this.dataSource.data = transaction.items;
+      this.dataSource.data = transaction.items
     })
     
   }
@@ -45,7 +58,13 @@ export class FinanceManagementComponent implements OnInit, AfterViewInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
-
+  
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    console.log(filterValue);
+    this.dataSource.filter = filterValue;
+  }
+  
   openDialog() {
     this.dialog.open(CategorizeDialogComponent);
   }

@@ -34,3 +34,47 @@ mat-paginator {
 #select-btn {
   margin-right: 10px;
 }
+
+.date {
+  color: rgb(182, 176, 176);
+  font-size: 12px;
+}
+
+.category,
+.split {
+  white-space: nowrap;
+  position: relative;
+  margin: 0 5px 0 10px;
+  display: inline-block;
+  height: 26px;
+  border-radius: 0 5px 5px 0;
+  padding: 0 25px 0 15px;
+  background: #ffa270;
+  color: rgb(238, 236, 236);
+  line-height: 26px;
+  font-size: 12px;
+}
+
+.category:before {
+  position: absolute;
+  content: "\25CF";
+  color: white;
+  text-shadow: 0 0 1px #333;
+  font-size: 11px;
+  line-height: 0px;
+  text-indent: 12px;
+  left: -15px;
+  width: 1px;
+  height: 0px;
+  border-right: 14px solid #ffa270;
+  border-top: 13px solid transparent;
+  border-bottom: 13px solid transparent;
+}
+.category:hover,
+.split:hover {
+  cursor: pointer;
+}
+.split {
+  border-radius: 0;
+  padding: 0 15px 0 15px;
+}

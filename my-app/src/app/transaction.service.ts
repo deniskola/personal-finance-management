@@ -17,4 +17,8 @@ export class TransactionService {
     public getCategories(){
       return this.http.get("http://127.0.0.1:4010/categories");
     }
+
+    public categorizeTransaction(id:any, body:any){
+      return this.http.post(`http://127.0.0.1:4010/transaction/${id}/categorize`, body);
+    }
 }

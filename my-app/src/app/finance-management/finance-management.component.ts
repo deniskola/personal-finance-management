@@ -5,13 +5,12 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { TransactionService } from '../transaction.service';
-import { HomeComponent } from '../home/home.component';
 import { CategorizeDialogComponent } from '../categorize-dialog/categorize-dialog.component';
 import {SelectionModel} from '@angular/cdk/collections';
 
  export interface TransactionData {
    id: number;
-   amount: number;
+   amount: string;
   
  }
 @Component({
@@ -22,12 +21,19 @@ import {SelectionModel} from '@angular/cdk/collections';
 export class FinanceManagementComponent implements OnInit, AfterViewInit {
   public displayedColumns: string[] = ['select', 'id'];
   public dataSource: MatTableDataSource<TransactionData>;
-  public transaction:any ={};
+  public transactions:any ={};
   selection = new SelectionModel<TransactionData>(true, []);
   public checkBoxIsShown: boolean = false ; // hidden by default
   selected!: number;
-  
+  catcode: any = {};
+  transaction: any;
+  allCategories:any[]=[];
+  categoryName:any;
   transactionsKinds = [{
+      key: "all",
+      value: "All"
+    },
+    {
       key: "pmt",
       value: "Payment"
     },
@@ -44,6 +50,9 @@ export class FinanceManagementComponent implements OnInit, AfterViewInit {
   paginator!: MatPaginator;
   @ViewChild(MatSort)
   sort!: MatSort;
+  
+  public transactionId: any;
+
   constructor(private transactionService: TransactionService, public dialog: MatDialog) {
     
     // Assign the data to the data source for the table to render
@@ -52,17 +61,28 @@ export class FinanceManagementComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.transactionService.getTransactions().subscribe((transaction:any)=>{
       this.dataSource.data = transaction.items;
-      this.transaction = transaction.items
+      this.transactions = transaction.items
+      console.log(this.dataSource.data)
     })
+    this.transactionService.getCategories().subscribe((categories:any)=>{
+      this.allCategories = categories.items
+    }); 
   }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
+  
+  getTransactionId(transactionId: number){
+    this.transactionId = transactionId;
+    console.log("id:" ,this.transactionId);
+    this.openDialog();
+  }
 
   filterTransactionsByKind(event: any){
-    this.dataSource.data = this.transaction.filter((x:any) => x['kind'] === event.value);
-    console.log(this.dataSource.data)
+    this.dataSource.data = this.transactions.filter((x:any) => 
+      event.value === "all" ? true : x['kind'] === event.value
+    );
   }
   
   applyFilter(event: Event) {
@@ -72,7 +92,13 @@ export class FinanceManagementComponent implements OnInit, AfterViewInit {
   }
   
   openDialog() {
-    this.dialog.open(CategorizeDialogComponent);
+    const dialogRef = this.dialog.open(CategorizeDialogComponent, {
+      data: {
+        transactions: this.dataSource.data,
+        transactionId: this.transactionId,
+        allCategories: this.allCategories
+      },
+    });
   }
 
   isAllSelected() {
@@ -102,6 +128,10 @@ export class FinanceManagementComponent implements OnInit, AfterViewInit {
     this.checkBoxIsShown = ! this.checkBoxIsShown;
   }
 
+  getCategoryNameByCode(code:any){
+    this.categoryName = this.allCategories.find((x:any)=> x.code === code || x.code.toString() === code.toString()).name
+    return this.categoryName
+  }
 }
 
 

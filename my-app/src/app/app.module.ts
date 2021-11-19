@@ -22,13 +22,15 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
+import { SplitDialogComponent } from './split-dialog/split-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     FinanceManagementComponent,
-    CategorizeDialogComponent
+    CategorizeDialogComponent,
+    SplitDialogComponent
   ],
   imports: [
     BrowserModule,

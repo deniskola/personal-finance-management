@@ -21,4 +21,8 @@ export class TransactionService {
     public categorizeTransaction(id:any, body:any){
       return this.http.post(`http://127.0.0.1:4010/transaction/${id}/categorize`, body);
     }
+
+    public splitTransaction(id:any, body:any){
+      return this.http.post(`http://127.0.0.1:4010/transaction/${id}/split`, body);
+    }
 }

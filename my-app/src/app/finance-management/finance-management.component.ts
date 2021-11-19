@@ -7,6 +7,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import { TransactionService } from '../transaction.service';
 import { CategorizeDialogComponent } from '../categorize-dialog/categorize-dialog.component';
 import {SelectionModel} from '@angular/cdk/collections';
+import { SplitDialogComponent } from '../split-dialog/split-dialog.component';
 
  export interface TransactionData {
    id: number;
@@ -52,6 +53,7 @@ export class FinanceManagementComponent implements OnInit, AfterViewInit {
   sort!: MatSort;
   
   public transactionId: any;
+  public transactionIdArray: any;
 
   constructor(private transactionService: TransactionService, public dialog: MatDialog) {
     
@@ -79,6 +81,12 @@ export class FinanceManagementComponent implements OnInit, AfterViewInit {
     this.openDialog();
   }
 
+  getAllTransactionsIds(transactionIdArray: any[]){
+    this.transactionIdArray = transactionIdArray;
+    console.log("id:" ,this.transactionId);
+    this.openSplitDialog();
+  }
+
   filterTransactionsByKind(event: any){
     this.dataSource.data = this.transactions.filter((x:any) => 
       event.value === "all" ? true : x['kind'] === event.value
@@ -96,6 +104,16 @@ export class FinanceManagementComponent implements OnInit, AfterViewInit {
       data: {
         transactions: this.dataSource.data,
         transactionId: this.transactionId,
+        allCategories: this.allCategories
+      },
+    });
+  }
+
+  openSplitDialog() {
+    const dialogRef = this.dialog.open(SplitDialogComponent, {
+      data: {
+        transactions: this.dataSource.data,
+        transactionIdArray: this.transactionIdArray,
         allCategories: this.allCategories
       },
     });

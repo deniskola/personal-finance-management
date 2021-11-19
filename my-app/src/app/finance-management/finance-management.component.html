@@ -48,14 +48,14 @@
         <br> 
         <p class="date">{{element.date}}</p>
         <span class="category" (click)="getTransactionId(element.id)">
-          {{ element.catcode === undefined ? 'Add category' : getCategoryNameByCode(element.catcode)
+          {{ (element.catcode === undefined || element.catcode === null || element.catcode === "") ? 'Add category' : getCategoryNameByCode(element.catcode)
           }}
         </span>
         <br><br>
       </div> 
       <div>
         <p>{{element.amount}}</p>
-        <span class="split">Split</span>
+        <span class="split" (click)="getAllTransactionsIds([])">Split</span>
       </div>
     </td>
   </ng-container> 

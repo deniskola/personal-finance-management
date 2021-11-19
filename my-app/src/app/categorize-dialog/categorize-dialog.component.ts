@@ -30,7 +30,7 @@ export class CategorizeDialogComponent implements OnInit {
   transaction: any;
   categorizeRequestBody:any = {};
   categoryName: any;
-  
+
   constructor(
     private transactionService: TransactionService,
     public dialogRef: MatDialogRef<FinanceManagementComponent>,
@@ -50,7 +50,7 @@ export class CategorizeDialogComponent implements OnInit {
     this.subCategory !== undefined ? 
       this.categorizeRequestBody.catcode = this.subCategory.toString() :
       this.categorizeRequestBody.catcode = this.category;
-
+    
     this.transactionService.categorizeTransaction( this.data.transactionId, this.categorizeRequestBody).subscribe((res)=>{
       this.transaction = this.data.transactions.find((item:any)=>item.id === this.data.transactionId);
       this.transaction.catcode = this.categorizeRequestBody.catcode;

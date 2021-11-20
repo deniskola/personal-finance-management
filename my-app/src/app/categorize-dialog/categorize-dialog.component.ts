@@ -14,6 +14,7 @@ interface Category{
   transactions: any;
   transactionId: any;
   allCategories:any[];
+  transactionsIdArray:any[]
 }
 
 @Component({
@@ -50,11 +51,12 @@ export class CategorizeDialogComponent implements OnInit {
     this.subCategory !== undefined ? 
       this.categorizeRequestBody.catcode = this.subCategory.toString() :
       this.categorizeRequestBody.catcode = this.category;
-    
-    this.transactionService.categorizeTransaction( this.data.transactionId, this.categorizeRequestBody).subscribe((res)=>{
-      this.transaction = this.data.transactions.find((item:any)=>item.id === this.data.transactionId);
-      this.transaction.catcode = this.categorizeRequestBody.catcode;
-    })
+    for(let i = 0; i < this.data.transactionsIdArray.length; i++){
+      this.transactionService.categorizeTransaction( this.data.transactionsIdArray[i], this.categorizeRequestBody).subscribe((res)=>{
+        this.transaction = this.data.transactions.find((item:any)=>item.id === this.data.transactionsIdArray[i]);
+        this.transaction.catcode = this.categorizeRequestBody.catcode;
+      })
+    }
   }
 
   selectCategoryOnChange(event:any){

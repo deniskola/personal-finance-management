@@ -1,3 +1,4 @@
+
 <div class="container">
   <div class="table-container">
 <table mat-table [dataSource]="dataSource" >
@@ -25,7 +26,9 @@
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef>
       <button mat-stroked-button color="warn"(click)="toggleShow()" id="select-btn">{{checkBoxIsShown ? 'Cancel' : 'Select'}}</button>
-      <button mat-flat-button color="warn" *ngIf="checkBoxIsShown" (click)="openDialog()">Categorize</button>
+      <button mat-flat-button color="warn" *ngIf="checkBoxIsShown && selection.selected.length > 0" 
+      (click)="pushSelectedTransactionIds()">Categorize</button>
+      <button mat-flat-button disabled *ngIf="checkBoxIsShown && selection.selected.length === 0" >Categorize</button>
       <mat-form-field appearance="standard" style="margin: 0 20px 4px 30px;" >
         <mat-label>Search transactions</mat-label>
         <input matInput (keyup)="applyFilter($event)" placeholder="Ex. dep" #input>

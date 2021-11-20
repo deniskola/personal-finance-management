@@ -53,7 +53,7 @@ export class FinanceManagementComponent implements OnInit, AfterViewInit {
   sort!: MatSort;
   
   public transactionId: any;
-  public transactionIdArray: any;
+  public transactionsIdArray:any[] = [];
 
   constructor(private transactionService: TransactionService, public dialog: MatDialog) {
     
@@ -80,8 +80,18 @@ export class FinanceManagementComponent implements OnInit, AfterViewInit {
     console.log("id:" ,this.transactionId);
     this.openDialog();
   }
+  pushSelectedTransactionIds(){
+    this.transactionsIdArray = [];
+    this.selection.selected.forEach((item)=>{
+      this.transactionsIdArray.push(item.id)
+    }); 
+    console.log(this.transactionsIdArray)
+    this.openDialog();
+  }
 
   getTransactionIdSplit(transactionId:number){
+    this.transactionsIdArray = [];
+    this.transactionsIdArray.push(transactionId);
     this.transactionId = transactionId;
     console.log("id:" ,this.transactionId);
     this.openSplitDialog();
@@ -104,7 +114,8 @@ export class FinanceManagementComponent implements OnInit, AfterViewInit {
       data: {
         transactions: this.dataSource.data,
         transactionId: this.transactionId,
-        allCategories: this.allCategories
+        allCategories: this.allCategories,
+        transactionsIdArray: this.transactionsIdArray
       },
     });
   }

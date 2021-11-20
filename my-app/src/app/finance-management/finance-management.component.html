@@ -47,15 +47,19 @@
         <mat-icon color="primary" *ngIf="element.direction === 'c'">keyboard_arrow_down</mat-icon>
         <br> 
         <p class="date">{{element.date}}</p>
-        <span class="category" (click)="getTransactionId(element.id)">
+        <span *ngIf="element.splits ===undefined" class="category" (click)="getTransactionId(element.id)">
           {{ (element.catcode === undefined || element.catcode === null || element.catcode === "") ? 'Add category' : getCategoryNameByCode(element.catcode)
           }}
         </span>
+        <span if="element.splits !== undefined" *ngFor="let split of element.splits">
+            <span class="category">{{getCategoryNameByCode(split.catcode)}} - €{{split.amount}}</span>
+        </span>
+        
         <br><br>
       </div> 
       <div>
         <p>{{element.amount}}</p>
-        <span class="split" (click)="getAllTransactionsIds([])">Split</span>
+        <span class="split" (click)="getTransactionIdSplit(element.id)">Split</span>
       </div>
     </td>
   </ng-container> 

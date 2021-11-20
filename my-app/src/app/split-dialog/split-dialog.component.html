@@ -1,1 +1,58 @@
-<p>split-dialog works!</p>
+<span class="header">
+    <h4 mat-dialog-title>Split transaction</h4>
+    <button mat-button (click)= "addSection()" class="addButton">
+        <mat-icon>add</mat-icon>
+    </button>
+</span>
+
+<br>
+
+<div class="container">
+<form *ngFor="let section of sections; let index" class="form">
+    <mat-divider></mat-divider>
+    <br>
+        <mat-form-field >
+            <mat-label>Category {{section}} </mat-label>
+            <mat-select (selectionChange)="selectCategoryOnChange($event, section)">
+            <mat-option *ngFor="let category of categories" [value]="category.code" >
+                {{category.name}}
+            </mat-option>
+            </mat-select>
+            
+        </mat-form-field> 
+       <br><br>
+        <mat-form-field >
+            <mat-label>Subcategory</mat-label>
+            <mat-select (selectionChange)="selectSubCategoryOnChange($event, section)">
+            <mat-option *ngFor="let category of subCategories" [value]="category.code">
+               {{category.name}}
+            </mat-option>
+            </mat-select>
+        </mat-form-field> 
+        <br>
+        <mat-form-field appearance="standard">
+            <mat-label>Amount (€)</mat-label>
+            <input  matInput (change)="onChange($event, section)">
+        </mat-form-field>
+        <button *ngIf="sections.length > 1" mat-button (click)= "removeSection(section)">
+            <mat-icon>delete</mat-icon>
+        </button>
+        <button *ngIf="sections.length <= 1"mat-button disabled>
+            <mat-icon>delete</mat-icon>
+        </button>
+        <br><br><br>
+        
+    </form> 
+    <mat-divider></mat-divider>
+</div>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button  *ngIf="sections.length > 1" mat-button [mat-dialog-close]="true" 
+                cdkFocusInitial (click)="splitTransaction()">
+        Submit
+    </button>
+    <button  disabled *ngIf="sections.length < 2" mat-button >
+        Submit
+    </button>
+  </mat-dialog-actions>
+

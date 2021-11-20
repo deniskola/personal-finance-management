@@ -81,8 +81,8 @@ export class FinanceManagementComponent implements OnInit, AfterViewInit {
     this.openDialog();
   }
 
-  getAllTransactionsIds(transactionIdArray: any[]){
-    this.transactionIdArray = transactionIdArray;
+  getTransactionIdSplit(transactionId:number){
+    this.transactionId = transactionId;
     console.log("id:" ,this.transactionId);
     this.openSplitDialog();
   }
@@ -113,7 +113,7 @@ export class FinanceManagementComponent implements OnInit, AfterViewInit {
     const dialogRef = this.dialog.open(SplitDialogComponent, {
       data: {
         transactions: this.dataSource.data,
-        transactionIdArray: this.transactionIdArray,
+        transactionId: this.transactionId,
         allCategories: this.allCategories
       },
     });

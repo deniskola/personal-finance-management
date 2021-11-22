@@ -31,7 +31,7 @@ export class CategorizeDialogComponent implements OnInit {
   transaction: any;
   categorizeRequestBody:any = {};
   categoryName: any;
-
+  default = 'A';
   constructor(
     private transactionService: TransactionService,
     public dialogRef: MatDialogRef<FinanceManagementComponent>,

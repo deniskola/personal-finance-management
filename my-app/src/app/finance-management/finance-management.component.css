@@ -1,23 +1,38 @@
 .container {
   position: relative;
   height: 100%;
-  border: 1px solid rgb(153, 153, 153);
   width: 100%;
 }
 
 .table-container {
   position: relative;
   height: 90%;
-  overflow: auto;
+  overflow-y: scroll;
 }
 table {
   width: 100%;
 }
+.searchInput {
+  margin: 0 20px 4px 30px;
+  width: 150px;
+}
+
+.filter {
+  margin: 0 20px 0 30px;
+  width: 100px;
+}
+.avatar {
+  margin-top: 8px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  box-shadow: none;
+}
 mat-paginator {
-  position: absolute;
+  position: relative;
   bottom: 0;
   width: 100%;
-  border-top: 1px solid rgb(153, 153, 153);
+  background-color: rgb(240, 240, 240);
 }
 
 .first-column {
@@ -41,10 +56,11 @@ mat-paginator {
 }
 
 .category,
-.split {
+.split,
+.nocategory {
   white-space: nowrap;
   position: relative;
-  margin: 0 5px 0 10px;
+  margin: 10px 15px 0 15px;
   display: inline-block;
   height: 26px;
   border-radius: 0 5px 5px 0;
@@ -55,6 +71,7 @@ mat-paginator {
   font-size: 12px;
 }
 
+.nocategory:before,
 .category:before {
   position: absolute;
   content: "\25CF";
@@ -70,11 +87,26 @@ mat-paginator {
   border-top: 13px solid transparent;
   border-bottom: 13px solid transparent;
 }
+.nocategory:hover,
 .category:hover,
 .split:hover {
   cursor: pointer;
 }
+.nocategory {
+  background: #818181;
+}
+.nocategory:before {
+  border-right: 14px solid #818181;
+}
 .split {
   border-radius: 0;
+  margin-top: 42px;
   padding: 0 15px 0 15px;
+  background: #818181;
+}
+
+@media only screen and (max-width: 800px) {
+  .searchInput {
+    display: none;
+  }
 }

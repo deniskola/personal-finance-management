@@ -352,15 +352,15 @@ components:
         sort-by: "date,catcode"
         sort-order: "date,asc"
         items:
-          - id: 66229487
-            beneficiary-name: Faculty of contemporary arts
+          - id: 24419286
+            beneficiary-name: Claire Stevens
             date: 1/1/2021
-            direction: d
-            amount: € 187.20
-            description: Tuition
+            direction: c
+            amount: € 300.10
+            description: Monthly rent
             currency: USD
-            mcc: 8299
-            kind: pmt
+            mcc:
+            kind: dep
           - id: 15122088
             beneficiary-name: Glovo
             date: 1/1/2021
@@ -379,15 +379,15 @@ components:
             currency: USD
             mcc: 5811
             kind: pmt
-          - id: 24419286
-            beneficiary-name: Claire Stevens
+          - id: 66229487
+            beneficiary-name: Faculty of arts
             date: 1/1/2021
-            direction: c
-            amount: € 300.10
-            description: Monthly rent
+            direction: d
+            amount: € 187.20
+            description: Tuition
             currency: USD
-            mcc:
-            kind: dep
+            mcc: 8299
+            kind: pmt
           - id: 31952674
             beneficiary-name: Josh
             date: 1/1/2021

@@ -47,9 +47,8 @@ mat-sidenav-container {
 }
 
 .content {
-  height: calc(100vh - 129px);
+  height: calc(100vh - 99px);
   margin: 16px;
-  padding: 16px;
 }
 
 .avatar {
@@ -74,4 +73,9 @@ mat-sidenav-container {
 a {
   text-decoration: none;
   color: white;
+}
+
+.logo {
+  font-size: large;
+  margin-left: 22px;
 }

@@ -23,8 +23,6 @@ export class SplitDialogComponent implements OnInit {
   splitRequestBody:any = {splits: []};
   section: any;
   amount: any = 0;
-  splitBtn= false;
-  totalAmount:any;
 
   constructor(
     private transactionService: TransactionService,
@@ -38,7 +36,6 @@ export class SplitDialogComponent implements OnInit {
         item['parent-code'] === null
       );
     }); 
-    this.sections.length < 2 ? this.splitBtn = false : true;
   }
 
   splitTransaction(){
@@ -63,7 +60,7 @@ export class SplitDialogComponent implements OnInit {
     this.splitRequestBody.splits[section] = {catcode: this.subCategory.toString()}
   }
 
-  onChange(event:any,section:any){
+  onFocusout(event:any,section:any){
     this.section = section;
     this.amount = parseFloat(event.target.value)
     this.splitRequestBody.splits[section].amount = this.amount;

@@ -35,8 +35,16 @@ export class FinanceManagementComponent implements OnInit, AfterViewInit {
       value: "All"
     },
     {
-      key: "pmt",
-      value: "Payment"
+      key: "acl",
+      value: "Account closing"
+    },
+    {
+      key: "adj",
+      value: "Adjustment"
+    },
+    {
+      key: "aop",
+      value: "Account opening"
     },
     {
       key: "dep",
@@ -45,6 +53,30 @@ export class FinanceManagementComponent implements OnInit, AfterViewInit {
     {
       key: "fee",
       value: "Fee"
+    },
+    {
+      key: "fcx",
+      value: "Foreign currencty exchange"
+    },
+    {
+      key: "lnd",
+      value: "Loan disbursement"
+    },
+    {
+      key: "lnr",
+      value: "Loan repayment"
+    },
+    {
+      key: "pmt",
+      value: "Payment"
+    },
+    {
+      key: "sal",
+      value: "Salary"
+    },
+    {
+      key: "spl",
+      value: "Split payment"
     }]
 
   @ViewChild(MatPaginator)
@@ -76,6 +108,8 @@ export class FinanceManagementComponent implements OnInit, AfterViewInit {
   }
   
   getTransactionId(transactionId: number){
+    this.transactionsIdArray = [];
+    this.transactionsIdArray.push(transactionId);
     this.transactionId = transactionId;
     console.log("id:" ,this.transactionId);
     this.openDialog();
@@ -90,8 +124,6 @@ export class FinanceManagementComponent implements OnInit, AfterViewInit {
   }
 
   getTransactionIdSplit(transactionId:number){
-    this.transactionsIdArray = [];
-    this.transactionsIdArray.push(transactionId);
     this.transactionId = transactionId;
     console.log("id:" ,this.transactionId);
     this.openSplitDialog();

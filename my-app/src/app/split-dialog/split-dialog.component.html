@@ -12,8 +12,8 @@
     <mat-divider></mat-divider>
     <br>
         <mat-form-field >
-            <mat-label>Category {{section}} </mat-label>
-            <mat-select (selectionChange)="selectCategoryOnChange($event, section)">
+            <mat-label>Category</mat-label>
+            <mat-select (selectionChange)="selectCategoryOnChange($event, section)" [(value)]="categories[0].code">
             <mat-option *ngFor="let category of categories" [value]="category.code" >
                 {{category.name}}
             </mat-option>
@@ -23,7 +23,7 @@
        <br><br>
         <mat-form-field >
             <mat-label>Subcategory</mat-label>
-            <mat-select (selectionChange)="selectSubCategoryOnChange($event, section)">
+            <mat-select (selectionChange)="selectSubCategoryOnChange($event, section)" >
             <mat-option *ngFor="let category of subCategories" [value]="category.code">
                {{category.name}}
             </mat-option>
@@ -32,7 +32,7 @@
         <br>
         <mat-form-field appearance="standard">
             <mat-label>Amount (€)</mat-label>
-            <input  matInput (change)="onChange($event, section)">
+            <input  matInput (focusout)="onFocusout($event, section)">
         </mat-form-field>
         <button *ngIf="sections.length > 1" mat-button (click)= "removeSection(section)">
             <mat-icon>delete</mat-icon>

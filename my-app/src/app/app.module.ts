@@ -8,7 +8,6 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
-import { HomeComponent } from './home/home.component';
 import { FinanceManagementComponent } from './finance-management/finance-management.component';
 import { HttpClientModule } from '@angular/common/http';
 import {MatTabsModule} from '@angular/material/tabs';
@@ -27,7 +26,6 @@ import { SplitDialogComponent } from './split-dialog/split-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     FinanceManagementComponent,
     CategorizeDialogComponent,
     SplitDialogComponent
